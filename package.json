@@ -6,7 +6,7 @@
   "author": "biaggioan <50343885+biaggioan@users.noreply.github.com>",
   "private": true,
   "scripts": {
-    "start": "quasar dev",
+    "start": "quasar build",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
