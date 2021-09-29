@@ -9,7 +9,7 @@
     :lock-scroll="true"
   />
 
-  <div class="container">
+  <div class="container-info">
     <a href="/#/" class="link-home">
       <img src="../assets/voltar.svg" />
     </a>
@@ -106,7 +106,7 @@ p {
   margin: 0;
 }
 
-.container {
+.container-info {
   width: 90%;
   max-width: 800px;
   margin: auto;
@@ -150,6 +150,7 @@ h1 span {
 }
 
 .pokemon-details {
+  margin-top: 0.5rem;
   padding: 1rem;
   background: #30a7d7;
   border-radius: 10px;
