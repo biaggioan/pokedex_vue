@@ -1,4 +1,13 @@
 <template>
+  <Loading
+    v-model:active="isLoading"
+    :is-full-page="fullPage"
+    :transition="'fade'"
+    :z-index="9999"
+    :width="'200px'"
+    :height="'200px'"
+    :lock-scroll="true"
+  />
   <div class="list">
     <article v-for="(pokemon, index) in pokemons" :key="'poke' + index">
       <a :href="'/#/pokemon/' + pokemon.id">
@@ -19,6 +28,7 @@
 
 <script>
 import api from "../../services/api";
+import Loading from "vue-loading-overlay";
 
 export default {
   name: "PokemonList",
@@ -26,6 +36,8 @@ export default {
   data: () => {
     return {
       pokemons: [],
+      isLoading: true,
+      fullPage: true,
     };
   },
   methods: {
@@ -34,7 +46,7 @@ export default {
         .get("/pokemon/")
         .then((response) => {
           // handle success
-          console.log(response);
+          // console.log(response);
           let data = response.data;
 
           data.results.forEach((pokemon) => {
@@ -54,9 +66,11 @@ export default {
         })
         .then(() => {
           // always executed
+          this.isLoading = false;
         });
     },
   },
+  components: { Loading },
   created() {
     this.fetchData();
   },
@@ -93,5 +107,15 @@ export default {
 .list article h3 {
   margin: 0;
   font-size: 1.5rem;
+}
+
+.is-full-page {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: #00000029;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

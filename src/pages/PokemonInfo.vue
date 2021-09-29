@@ -1,4 +1,14 @@
 <template>
+  <Loading
+    v-model:active="isLoading"
+    :is-full-page="fullPage"
+    :transition="'fade'"
+    :z-index="9999"
+    :width="'200px'"
+    :height="'200px'"
+    :lock-scroll="true"
+  />
+
   <div class="container">
     <a href="/#/" class="link-home">
       <img src="../assets/voltar.svg" />
@@ -49,16 +59,19 @@
 
 <script>
 import api from "../services/api";
+import Loading from "vue-loading-overlay";
 
 import Type from "../components/Type";
 
 export default {
   name: "Pokemon Info",
   propos: ["id"],
-  components: { Type },
+  components: { Type, Loading },
   data: () => {
     return {
       pokemonInfo: {},
+      isLoading: true,
+      fullPage: true,
     };
   },
   methods: {
@@ -75,6 +88,9 @@ export default {
         .catch((error) => {
           // handle error
           console.log(error);
+        })
+        .then(() => {
+          this.isLoading = false;
         });
     },
   },
